@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { Product1Component } from './product1/product1.component';
 import { ProductService } from './shared/product.service';
 import { Product2Component } from './product2/product2.component';
-
+import { LoggerService } from './shared/logger.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +19,7 @@ import { Product2Component } from './product2/product2.component';
     FormsModule,
     HttpModule
   ],
-  providers: [ProductService],
+  providers: [ProductService,LoggerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
