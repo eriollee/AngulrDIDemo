@@ -22,17 +22,20 @@ import { LoggerService } from './shared/logger.service';
   ],
   providers: [{
     provide:ProductService,
-    useFactory:(logger:LoggerService)=>{
-    let dev= Math.random()>0.5
-    if(dev){
+    useFactory:(logger:LoggerService,isDev)=>{
+    if(isDev){
       return new ProductService(logger);
     }else{
       return new AnotherProductService(logger);
     }
     },
-    deps:[LoggerService]
+    deps:[LoggerService,"IS_DEV_ENV"]
 
-},LoggerService],
+},LoggerService,
+  {
+    provide:"IS_DEV_ENV",useValue:false
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
