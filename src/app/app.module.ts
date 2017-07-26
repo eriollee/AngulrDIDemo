@@ -20,15 +20,19 @@ import { LoggerService } from './shared/logger.service';
     FormsModule,
     HttpModule
   ],
-  providers: [{provide:ProductService,useFactory:()=>{
-    let logger = new LoggerService;
+  providers: [{
+    provide:ProductService,
+    useFactory:(logger:LoggerService)=>{
     let dev= Math.random()>0.5
     if(dev){
       return new ProductService(logger);
     }else{
       return new AnotherProductService(logger);
     }
-  }},LoggerService],
+    },
+    deps:[LoggerService]
+
+},LoggerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
