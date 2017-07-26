@@ -22,18 +22,18 @@ import { LoggerService } from './shared/logger.service';
   ],
   providers: [{
     provide:ProductService,
-    useFactory:(logger:LoggerService,isDev)=>{
-    if(isDev){
+    useFactory:(logger:LoggerService,appConfig)=>{
+    if(appConfig.isDev){
       return new ProductService(logger);
     }else{
       return new AnotherProductService(logger);
     }
     },
-    deps:[LoggerService,"IS_DEV_ENV"]
+    deps:[LoggerService,"APP_CONFIG"]
 
 },LoggerService,
   {
-    provide:"IS_DEV_ENV",useValue:false
+    provide:"APP_CONFIG",useValue:{isDev:false}
   }
 ],
   bootstrap: [AppComponent]
